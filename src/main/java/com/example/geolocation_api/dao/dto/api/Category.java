@@ -1,4 +1,4 @@
-package com.example.geolocation_api.dao.dto;
+package com.example.geolocation_api.dao.dto.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties
-public class VenueLocation {
+public class Category {
 
-    @JsonProperty("response")
-    private ApiResponse response;
+    @JsonProperty
+    private String name;
 }

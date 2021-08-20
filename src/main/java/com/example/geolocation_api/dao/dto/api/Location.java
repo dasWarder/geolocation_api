@@ -1,4 +1,4 @@
-package com.example.geolocation_api.dao.dto;
+package com.example.geolocation_api.dao.dto.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

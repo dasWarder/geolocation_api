@@ -1,4 +1,4 @@
-package com.example.geolocation_api.dao.dto;
+package com.example.geolocation_api.dao.dto.api;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties
-public class ApiResponse {
+public class ApiRequest {
 
     @JsonProperty("venues")
     private List<Venue> venues;
