@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "place")
+@Table(name = "location")
 public class Place {
 
     @Id

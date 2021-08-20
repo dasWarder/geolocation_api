@@ -15,6 +15,9 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
+        <liquibase.version>4.3.0</liquibase.version>
+        <jakarta.xml.bind.version>2.3.2</jakarta.xml.bind.version>
+        <liquibase.maven.plugin.version>4.3.0</liquibase.maven.plugin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -41,6 +44,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-maven-plugin</artifactId>
+            <version>${liquibase.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -56,6 +64,31 @@
                         </exclude>
                     </excludes>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>${liquibase.maven.plugin.version}</version>
+                <configuration>
+                    <propertyFile>src/main/resources/db/changelog/liquibase.properties</propertyFile>
+                    <changeLogFile>src/main/resources/db/changelog/changelog-master.xml</changeLogFile>
+                    <url>jdbc:postgresql://localhost:9099/location</url>
+                    <driver>org.postgresql.Driver</driver>
+                    <username>user</username>
+                    <password>password</password>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>42.2.20</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>jakarta.xml.bind</groupId>
+                        <artifactId>jakarta.xml.bind-api</artifactId>
+                        <version>${jakarta.xml.bind.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>

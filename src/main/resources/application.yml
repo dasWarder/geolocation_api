@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    username: ${POSTGRE_USER}
+    password: ${POSTGRE_PASS}
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:9099/location
+  liquibase:
+    enabled: true
+    change-log: db/migration/changelog-master.xml
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    generate-ddl: false

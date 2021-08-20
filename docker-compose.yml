@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+  postgre:
+    image: postgres:12
+    restart: always
+    ports:
+    - 9099:5432
+    environment:
+      POSTGRES_USER: ${POSTGRE_USER}
+      POSTGRES_PASSWORD: ${POSTGRE_PASS}
+      POSTGRES_DB: location
+    volumes:
+    - db-places:/var/lib/places
+
+volumes:
+  db-places:
