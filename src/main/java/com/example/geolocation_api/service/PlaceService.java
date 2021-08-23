@@ -1,14 +1,15 @@
 package com.example.geolocation_api.service;
 
 import com.example.geolocation_api.dao.model.Place;
+import com.example.geolocation_api.service.exception.ParamNotValidException;
+
+import java.util.List;
 
 public interface PlaceService {
 
-    Place savePlace(Place place);
+    List<Place> saveAllPlaces(List<Place> places) throws ParamNotValidException;
 
-    Place getPlaceByLocation(Float lat, Float lng);
+    List<Place> getPlaceByLocation(Double lat, Double lng) throws ParamNotValidException;
 
-    Place getPlaceById(String id);
-
-    Place deletePlaceById(String id);
+    List<Place> getPlacesByName(String name) throws ParamNotValidException;
 }

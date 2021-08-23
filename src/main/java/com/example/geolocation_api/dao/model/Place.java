@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -21,12 +18,16 @@ public class Place {
     @Id
     @Column(name = "id")
     private String id;
+
     @Column
     private String name;
+
     @Column
     private String address;
+
     @Column
-    private Float lat;
+    private Double lat;
+
     @Column
-    private Float lng;
+    private Double lng;
 }

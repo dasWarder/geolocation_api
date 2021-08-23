@@ -12,3 +12,8 @@ spring:
       ddl-auto: validate
     show-sql: true
     generate-ddl: false
+
+api:
+  foursquare:
+    id: ${FOURSQUARE_API_CLIENT_ID}
+    secret: ${FOURSQUARE_API_CLIENT_SECRET}

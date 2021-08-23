@@ -1,10 +1,14 @@
 package com.example.geolocation_api.service;
 
 import com.example.geolocation_api.dao.model.Place;
+import com.example.geolocation_api.service.exception.ParamNotValidException;
+import com.example.geolocation_api.service.exception.PlaceNotFoundException;
+
+import java.util.List;
 
 public interface PlaceConvertingService {
 
-    Place findPlaceByLatAndLngFromDbOrAddIt(Float lat, Float lng);
+    List<Place> findPlaceByLatAndLngFromDbOrAddIt(Double lat, Double lng) throws ParamNotValidException;
 
-    Place findPlaceByNameFromDbOrAddIt(String name);
+    List<Place> findPlaceByName(String name) throws PlaceNotFoundException, ParamNotValidException;
 }

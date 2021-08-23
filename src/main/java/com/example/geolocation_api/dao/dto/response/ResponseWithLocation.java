@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ResponseWithLocation {
 
-    private Float lat;
-    private Float lng;
+    private Double lat;
+    private Double lng;
     private String address;
 }

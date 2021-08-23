@@ -13,10 +13,10 @@ import lombok.NoArgsConstructor;
 public class Location {
 
     @JsonProperty
-    private Float lat;
+    private Double lat;
 
     @JsonProperty
-    private Float lng;
+    private Double lng;
 
     @JsonProperty
     private String city;
