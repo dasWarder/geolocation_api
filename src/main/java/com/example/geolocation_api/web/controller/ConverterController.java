@@ -14,6 +14,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,8 +29,8 @@ public class ConverterController {
     private final PlaceConvertingService placeConvertingService;
 
     @GetMapping
-    public ResponseEntity<List<ResponseWithName>> getPlaceByLocation(@RequestParam("lat") Double lat,
-                                                                     @RequestParam("lng") Double lng) throws ParamNotValidException {
+    public ResponseEntity<List<ResponseWithName>> getPlaceByLocation(@RequestParam("lat") @NotBlank Double lat,
+                                                                     @RequestParam("lng") @NotBlank Double lng) throws ParamNotValidException {
         List<ResponseWithName> responseDto = placeConvertingService.findPlaceByLatAndLngFromDbOrAddIt(lat, lng)
                                                                                                             .stream()
                                                                                                             .map(mapper::placeToResponseWithName)
@@ -37,7 +39,7 @@ public class ConverterController {
     }
 
     @GetMapping("/{name}")
-    public ResponseEntity<List<ResponseWithLocation>> getPlaceByName(@PathVariable("name") String placeName)
+    public ResponseEntity<List<ResponseWithLocation>> getPlaceByName(@PathVariable("name") @NotBlank String placeName)
                                                                     throws PlaceNotFoundException, ParamNotValidException {
         List<ResponseWithLocation> responseDto = placeConvertingService.findPlaceByName(placeName)
                                                                                 .stream()
