@@ -13,5 +13,4 @@ public class ResponseWithLocation {
 
     private Double lat;
     private Double lng;
-    private String address;
 }

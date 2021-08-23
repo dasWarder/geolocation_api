@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ResponseWithName {
 
-    private String placeName;
+    private String name;
     private String address;
+    private Double lat;
+    private Double lng;
 }

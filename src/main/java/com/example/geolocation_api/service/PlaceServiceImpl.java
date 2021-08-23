@@ -3,7 +3,6 @@ package com.example.geolocation_api.service;
 import com.example.geolocation_api.dao.model.Place;
 import com.example.geolocation_api.dao.repository.PlaceRepository;
 import com.example.geolocation_api.service.exception.ParamNotValidException;
-import com.example.geolocation_api.service.exception.PlaceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -49,4 +48,5 @@ public class PlaceServiceImpl implements PlaceService {
 
         return placesByName;
     }
+
 }
