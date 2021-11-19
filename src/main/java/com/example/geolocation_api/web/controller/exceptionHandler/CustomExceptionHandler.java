@@ -1,6 +1,5 @@
 package com.example.geolocation_api.web.controller.exceptionHandler;
 
-
 import com.example.geolocation_api.dao.model.Place;
 import com.example.geolocation_api.service.exception.ParamNotValidException;
 import com.example.geolocation_api.service.exception.PlaceNotFoundException;
@@ -25,74 +24,66 @@ import java.util.Set;
 @ControllerAdvice
 public class CustomExceptionHandler {
 
-    @ExceptionHandler(value = {
-            PlaceNotFoundException.class,
-            ParamNotValidException.class,
-            MissingServletRequestParameterException.class,
-            NullPointerException.class,
-            MethodArgumentTypeMismatchException.class
-    })
-    public ResponseEntity<ExceptionResponse> validationException(Exception e) {
+  @ExceptionHandler(
+      value = {
+        PlaceNotFoundException.class,
+        ParamNotValidException.class,
+        MissingServletRequestParameterException.class,
+        NullPointerException.class,
+        MethodArgumentTypeMismatchException.class
+      })
+  public ResponseEntity<ExceptionResponse> validationException(Exception e) {
 
-        String type = e.getClass().getSimpleName();
-        String message = e.getMessage();
+    String type = e.getClass().getSimpleName();
+    String message = e.getMessage();
 
-        if(e.getCause() != null) {
-            type = e.getCause().getClass().getSimpleName();
-            message = e.getCause().getMessage();
-        }
-
-        ExceptionResponse response = ExceptionResponse.builder()
-                                                                .type(type)
-                                                                .message(message)
-                                                                .build();
-
-        return ResponseEntity.badRequest().body(response);
+    if (e.getCause() != null) {
+      type = e.getCause().getClass().getSimpleName();
+      message = e.getCause().getMessage();
     }
 
-    @ExceptionHandler(value = {  ConstraintViolationException.class })
-    public ResponseEntity<ViolationResponse> onConstraintValidationException(ConstraintViolationException exception) {
+    ExceptionResponse response = ExceptionResponse.builder().type(type).message(message).build();
 
-        ViolationResponse response = new ViolationResponse();
+    return ResponseEntity.badRequest().body(response);
+  }
 
-        Set<ConstraintViolation<?>> constraintViolations = exception
-                                                                     .getConstraintViolations();
+  @ExceptionHandler(value = {ConstraintViolationException.class})
+  public ResponseEntity<ViolationResponse> onConstraintValidationException(
+      ConstraintViolationException exception) {
 
-        constraintViolations.forEach(violation -> {
-            String fieldName = violation.getPropertyPath().toString();
-            String message = violation.getMessage();
+    ViolationResponse response = new ViolationResponse();
 
-            Violation singleViolation = Violation.builder()
-                                                            .fieldName(fieldName)
-                                                            .message(message)
-                                                            .build();
-            response.getViolations()
-                    .add(singleViolation);
+    Set<ConstraintViolation<?>> constraintViolations = exception.getConstraintViolations();
+
+    constraintViolations.forEach(
+        violation -> {
+          String fieldName = violation.getPropertyPath().toString();
+          String message = violation.getMessage();
+
+          Violation singleViolation =
+              Violation.builder().fieldName(fieldName).message(message).build();
+          response.getViolations().add(singleViolation);
         });
 
-        return ResponseEntity.badRequest().body(response);
-    }
+    return ResponseEntity.badRequest().body(response);
+  }
 
-    @ExceptionHandler(value = { MethodArgumentNotValidException.class })
-    public ResponseEntity<ViolationResponse> onMethodArgumentException(MethodArgumentNotValidException exception) {
+  @ExceptionHandler(value = {MethodArgumentNotValidException.class})
+  public ResponseEntity<ViolationResponse> onMethodArgumentException(
+      MethodArgumentNotValidException exception) {
 
-        ViolationResponse response = new ViolationResponse();
-        List<FieldError> fieldErrors = exception
-                .getBindingResult()
-                .getFieldErrors();
+    ViolationResponse response = new ViolationResponse();
+    List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
 
-        fieldErrors.forEach(error -> {
-            String fieldName = error.getField();
-            String message = error.getDefaultMessage();
+    fieldErrors.forEach(
+        error -> {
+          String fieldName = error.getField();
+          String message = error.getDefaultMessage();
 
-            Violation violation = Violation.builder()
-                                                    .fieldName(fieldName)
-                                                    .message(message)
-                                                    .build();
-            response.getViolations()
-                                    .add(violation);
+          Violation violation = Violation.builder().fieldName(fieldName).message(message).build();
+          response.getViolations().add(violation);
         });
 
-        return ResponseEntity.badRequest().body(response);
-    }
+    return ResponseEntity.badRequest().body(response);
+  }
 }
