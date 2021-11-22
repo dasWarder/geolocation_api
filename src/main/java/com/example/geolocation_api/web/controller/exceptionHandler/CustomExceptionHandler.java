@@ -13,6 +13,7 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import javax.validation.ConstraintViolation;
@@ -30,7 +31,8 @@ public class CustomExceptionHandler {
         ParamNotValidException.class,
         MissingServletRequestParameterException.class,
         NullPointerException.class,
-        MethodArgumentTypeMismatchException.class
+        MethodArgumentTypeMismatchException.class,
+        HttpClientErrorException.class
       })
   public ResponseEntity<ExceptionResponse> validationException(Exception e) {
 

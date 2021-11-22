@@ -35,7 +35,7 @@ const Main = () => {
                     <Nav.Link onClick={() => changeContent('coord')}>Find by coordinates</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link onClick={() => changeContent('name')}>Find by name</Nav.Link>
+                    <Nav.Link onClick={() => changeContent('name')}>Find coordinates by name</Nav.Link>
                 </Nav.Item>
             </Nav>
             <div>

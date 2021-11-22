@@ -4,7 +4,6 @@ import { useState} from "react";
 
 const CoordSearchForm = (props) => {
 
-
     const[coordData, setCoordData] = useState({
         'lat': 0.0,
         'lng': 0.0
@@ -30,7 +29,7 @@ const CoordSearchForm = (props) => {
                 res.lat = cur;
                 res.lng = p.lng;
             }
-            if(val == 'lng') {
+            if(val === 'lng') {
                 res.lng = cur;
                 res.lat = p.lat;
             }
